@@ -50,3 +50,11 @@ class Client:
         )
         json_data: dict = json.loads(response.response_data)
         return Background(json_data)
+
+    async def get_badge(self, badge_id: str) -> Badge:
+        response: ResponseData = await self.http_client.request(
+            Route(RequestMethod.GET, f"/badge/show", params={"badgeId": badge_id})
+        )
+        assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
+        json_data: dict = json.loads(response.response_data)
+        return Badge(json_data)
