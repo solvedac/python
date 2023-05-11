@@ -36,9 +36,7 @@ class Background:
     def __init__(self, data: Dict[str, Union[str, int, bool, list]]):
         self.background_id: str = data["backgroundId"]
         self.background_image_url: str = data["backgroundImageUrl"]
-        self.fallback_background_image_url: Union[str, None] = data[
-            "fallbackBackgroundImageUrl"
-        ]
+        self.fallback_background_image_url: Union[str, None] = data["fallbackBackgroundImageUrl"]
         self.background_video_url: Union[str, None] = data["backgroundVideoUrl"]
         self.unlocked_user_count: int = data["unlockedUserCount"]
         self.display_name: str = data["displayName"]
