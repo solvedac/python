@@ -16,3 +16,4 @@ OTHER DEALINGS IN THE SOFTWARE.
 from .author import Author
 from .background import Background
 from .badge import Badge
+from .user import User
