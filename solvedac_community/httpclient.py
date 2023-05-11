@@ -49,7 +49,9 @@ class Route:
             first = False
         return url
 
-    def __init__(self, method: RequestMethod, url: str, params: Optional[Dict[str, Any]] = None) -> None:
+    def __init__(
+        self, method: RequestMethod, url: str, params: Optional[Dict[str, Any]] = None
+    ) -> None:
         if params:
             url = self.__make_url(url, params)
         (self.url): str = self.BASE_URL + url
@@ -73,14 +75,18 @@ class HTTPClient:
             cls._instance = super().__new__(cls)
         return cls._instance
 
-    def __init__(self, loop: asyncio.AbstractEventLoop, solvedac_token: Optional[str] = None) -> None:
+    def __init__(
+        self, loop: asyncio.AbstractEventLoop, solvedac_token: Optional[str] = None
+    ) -> None:
         (self.loop): asyncio.AbstractEventLoop = loop
         (self.session): aiohttp.ClientSession = MISSING
         (self.lock): asyncio.Lock = asyncio.Lock()
         (self.solvedac_token): Union[str, None] = solvedac_token
         atexit.register(self.close)
 
-    async def request(self, route: Route, headers: Optional[Dict[str, str]] = None) -> ResponseData:
+    async def request(
+        self, route: Route, headers: Optional[Dict[str, str]] = None
+    ) -> ResponseData:
         if not headers:
             headers = {}
 
@@ -92,12 +98,16 @@ class HTTPClient:
 
         if self.session == MISSING:
             if self.solvedac_token is not None:
-                self.session = aiohttp.ClientSession(cookies={"solvedacToken": self.solvedac_token})
+                self.session = aiohttp.ClientSession(
+                    cookies={"solvedacToken": self.solvedac_token}
+                )
             else:
                 self.session = aiohttp.ClientSession()
 
         async with self.lock:
-            async with self.session.request(method=route.method.name, url=route.url, headers=headers) as response:
+            async with self.session.request(
+                method=route.method.name, url=route.url, headers=headers
+            ) as response:
                 status: int = response.status
                 text: str = await response.text(encoding="utf-8")
                 return ResponseData(text, status)
