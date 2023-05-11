@@ -14,9 +14,15 @@ OTHER DEALINGS IN THE SOFTWARE.
 """
 
 import asyncio
+import json
 from typing import Optional
 
+from .Models import *
+
 from .httpclient import HTTPClient
+from .httpclient import RequestMethod
+from .httpclient import ResponseData
+from .httpclient import Route
 
 
 class Client:
@@ -30,3 +36,17 @@ class Client:
             pass
         self.loop = asyncio.get_event_loop()
         self.http_client = HTTPClient(self.loop, solvedac_token)
+
+    async def get_background(self, background_id: str) -> Background:
+        response: ResponseData = await self.http_client.request(
+            Route(
+                RequestMethod.GET,
+                f"/background/show",
+                params={"backgroundId": background_id},
+            )
+        )
+        assert response.status == 200, (
+            "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
+        )
+        json_data: dict = json.loads(response.response_data)
+        return Background(json_data)
