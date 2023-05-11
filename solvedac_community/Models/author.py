@@ -17,6 +17,7 @@ from dataclasses import dataclass
 from typing import Dict, Union
 
 
+@dataclass
 class Author:
     author_id: str
     role: str
