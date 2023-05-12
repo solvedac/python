@@ -15,7 +15,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 import asyncio
 import json
-from typing import Optional
+from typing import Optional, List
 
 from .Models import *
 
@@ -44,6 +44,14 @@ class Client:
         assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         json_data: dict = json.loads(response.response_data)
         return User(json_data)
+
+    async def get_user_organizations(self, handle: str) -> List[Organization]:
+        response: ResponseData = await self.http_client.request(
+            Route(RequestMethod.GET, f"/user/organizations", params={"handle": handle})
+        )
+        assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
+        json_data: dict = json.loads(response.response_data)
+        return [Organization(dat) for dat in json_data]
 
     async def get_background(self, background_id: str) -> Background:
         response: ResponseData = await self.http_client.request(
