@@ -20,4 +20,5 @@ from .coinshop_product import CoinshopProduct
 from .organization import Organization
 from .problem_level import ProblemLevel
 from .problem_stats import ProblemStats
+from .solvedac_statistics import SolvedAcStatistics
 from .user import User

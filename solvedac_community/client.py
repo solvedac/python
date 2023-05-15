@@ -92,3 +92,9 @@ class Client:
         assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         json_data: dict = json.loads(response.response_data)
         return [CoinshopProduct(d) for d in json_data]
+
+    async def get_site_stats(self) -> SolvedAcStatistics:
+        response: ResponseData = await self.http_client.request(Route(RequestMethod.GET, f"/site/stats"))
+        assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
+        json_data: dict = json.loads(response.response_data)
+        return SolvedAcStatistics(json_data)
