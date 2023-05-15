@@ -13,11 +13,9 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from .author import Author
-from .background import Background
-from .badge import Badge
-from .coinshop_product import CoinshopProduct
-from .organization import Organization
-from .problem_level import ProblemLevel
-from .problem_stats import ProblemStats
-from .user import User
+from enum import Enum
+
+
+class PriceUnit(Enum):
+    COINS = "coins"
+    STARDUSTS = "stardusts"
