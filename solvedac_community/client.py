@@ -86,3 +86,9 @@ class Client:
         assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         json_data: dict = json.loads(response.response_data)
         return json_data["rate"]
+
+    async def get_coinshop_products(self) -> List[CoinshopProduct]:
+        response: ResponseData = await self.http_client.request(Route(RequestMethod.GET, f"/coins/shop/list"))
+        assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
+        json_data: dict = json.loads(response.response_data)
+        return [CoinshopProduct(d) for d in json_data]
