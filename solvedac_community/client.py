@@ -80,3 +80,9 @@ class Client:
         assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         json_data: dict = json.loads(response.response_data)
         return Badge(json_data)
+
+    async def get_coins_exchange_rate(self) -> int:
+        response: ResponseData = await self.http_client.request(Route(RequestMethod.GET, f"/coins/exchange_rate"))
+        assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
+        json_data: dict = json.loads(response.response_data)
+        return json_data["rate"]
