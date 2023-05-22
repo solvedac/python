@@ -13,13 +13,17 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from .author import Author
-from .background import Background
-from .badge import Badge
-from .coinshop_product import CoinshopProduct
-from .organization import Organization
-from .problem_level import ProblemLevel
-from .problem_stats import ProblemStats
-from .solvedac_statistics import SolvedAcStatistics
-from .tagged_problem import TaggedProblem
-from .user import User
+from dataclasses import dataclass
+from typing import Dict
+
+
+@dataclass
+class TagDisplayName:
+    language: str
+    name: str
+    short: str
+
+    def __init__(self, data: Dict[str, str]):
+        self.language = data["language"]
+        self.name = data["name"]
+        self.short = data["short"]
