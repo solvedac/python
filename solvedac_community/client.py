@@ -98,3 +98,11 @@ class Client:
         assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         json_data: dict = json.loads(response.response_data)
         return SolvedAcStatistics(json_data)
+
+    async def get_problem_by_id(self, problem_id: int) -> TaggedProblem:
+        response: ResponseData = await self.http_client.request(
+            Route(RequestMethod.GET, f"/problem/show", params={"problemId": problem_id})
+        )
+        assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
+        json_data: dict = json.loads(response.response_data)
+        return TaggedProblem(json_data)
