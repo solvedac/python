@@ -115,3 +115,9 @@ class Client:
         assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         json_data: dict = json.loads(response.response_data)
         return [TaggedProblem(d) for d in json_data]
+
+    async def get_problem_level(self) -> List[ProblemLevelData]:
+        response: ResponseData = await self.http_client.request(Route(RequestMethod.GET, f"/problem/level"))
+        assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
+        json_data: dict = json.loads(response.response_data)
+        return [ProblemLevelData(d) for d in json_data]
