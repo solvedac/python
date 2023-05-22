@@ -17,25 +17,21 @@ import asyncio
 import json
 from typing import Optional, List, Iterable, Union
 
+from .HTTPClients import *
 from .Models import *
-
-from .httpclient import HTTPClient
-from .httpclient import RequestMethod
-from .httpclient import ResponseData
-from .httpclient import Route
 
 
 class Client:
     loop: asyncio.AbstractEventLoop
-    http_client: HTTPClient
+    http_client: AbstractHTTPClient
 
-    def __init__(self, solvedac_token: Optional[str] = None) -> None:
+    def __init__(self, solvedac_token: Optional[str] = None, http_library: HTTPClientLibrary = None) -> None:
         try:
             asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
         except AttributeError:
             pass
         self.loop = asyncio.get_event_loop()
-        self.http_client = HTTPClient(self.loop, solvedac_token)
+        self.http_client = get_http_client(self.loop, solvedac_token=solvedac_token, lib=http_library)
 
     async def get_user(self, handle: str) -> User:
         response: ResponseData = await self.http_client.request(
