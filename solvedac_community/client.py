@@ -117,3 +117,26 @@ class Client:
         assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         json_data: dict = json.loads(response.response_data)
         return [ProblemLevelData(d) for d in json_data]
+
+    async def search_problem(
+        self,
+        query: str,
+        direction: Union[SortDirection, str],
+        page: int,
+        sort: Union[SortType, str],
+    ) -> ProblemSearchData:
+        response: ResponseData = await self.http_client.request(
+            Route(
+                RequestMethod.GET,
+                f"/search/problem",
+                params={
+                    "query": query,
+                    "direction": str(direction),
+                    "page": page,
+                    "sort": str(sort),
+                },
+            )
+        )
+        assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
+        json_data: dict = json.loads(response.response_data)
+        return ProblemSearchData(json_data)

@@ -20,7 +20,10 @@ from .coinshop_product import CoinshopProduct
 from .organization import Organization
 from .problem_level import ProblemLevel
 from .problem_level_data import ProblemLevelData
+from .problem_search_data import ProblemSearchData
 from .problem_stats import ProblemStats
 from .solvedac_statistics import SolvedAcStatistics
+from .sort_direction import SortDirection
+from .sort_type import SortType
 from .tagged_problem import TaggedProblem
 from .user import User
