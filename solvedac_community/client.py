@@ -129,14 +129,17 @@ class Client:
             Route(
                 RequestMethod.GET,
                 f"/search/problem",
-                params={
-                    "query": query,
-                    "direction": str(direction),
-                    "page": page,
-                    "sort": str(sort),
-                },
+                params={"query": query, "direction": str(direction), "page": page, "sort": str(sort)},
             )
         )
         assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         json_data: dict = json.loads(response.response_data)
         return ProblemSearchData(json_data)
+
+    async def get_search_auto_completion(self, query: str) -> AutoCompletionData:
+        response: ResponseData = await self.http_client.request(
+            Route(RequestMethod.GET, f"/search/suggestion", params={"query": query})
+        )
+        assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
+        json_data: dict = json.loads(response.response_data)
+        return AutoCompletionData(json_data)
