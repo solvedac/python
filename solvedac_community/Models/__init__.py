@@ -14,6 +14,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 """
 
 from .author import Author
+from .auto_completion_data import AutoCompletionData
 from .background import Background
 from .badge import Badge
 from .coinshop_product import CoinshopProduct
