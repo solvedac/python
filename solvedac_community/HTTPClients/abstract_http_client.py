@@ -13,7 +13,7 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from abc import *
+from abc import ABCMeta, abstractmethod
 from typing import Optional, Dict
 
 from .httpclient import ResponseData, Route
