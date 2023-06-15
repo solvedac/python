@@ -38,6 +38,12 @@ class AiohttpHTTPClient(AbstractHTTPClient):
         self.solvedac_token: Union[str, None] = solvedac_token
         atexit.register(self.close)
 
+    async def __create_session(self):
+        if self.solvedac_token is not None:
+            self.session = aiohttp.ClientSession(cookies={"solvedacToken": self.solvedac_token})
+        else:
+            self.session = aiohttp.ClientSession()
+
     async def request(self, route: Route, headers: Optional[Dict[str, str]] = None) -> ResponseData:
         if not headers:
             headers = {}
@@ -46,10 +52,7 @@ class AiohttpHTTPClient(AbstractHTTPClient):
         headers.update(default_header)
 
         if self.session == MISSING:
-            if self.solvedac_token is not None:
-                self.session = aiohttp.ClientSession(cookies={"solvedacToken": self.solvedac_token})
-            else:
-                self.session = aiohttp.ClientSession()
+            await self.__create_session()
 
         async with self.lock:
             async with self.session.request(method=route.method.name, url=route.url, headers=headers) as response:
