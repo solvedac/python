@@ -26,7 +26,6 @@ class ProblemStats:
     solved: int
     tried: int
     partial: int
-    exp: int
 
     def __init__(self, data: Dict[str, int]):
         self.level = ProblemLevel(data["level"])
@@ -34,4 +33,3 @@ class ProblemStats:
         self.solved = data["solved"]
         self.tried = data["tried"]
         self.partial = data["partial"]
-        self.exp = data["exp"]

@@ -84,7 +84,6 @@ class SimplifiedUser:
     rival_count: int
     tier: UserTier
     rating: int
-    exp: int
     rating_by_problems_sum: int
     rating_by_class: int
     rating_by_solved_count: int
@@ -110,7 +109,6 @@ class SimplifiedUser:
         self.reverse_rival_count: int = data["reverseRivalCount"]
         self.tier: UserTier = UserTier(data["tier"])
         self.rating: int = data["rating"]
-        self.exp: int = data["exp"]
         self.rating_by_problems_sum: int = data["ratingByProblemsSum"]
         self.rating_by_class: int = data["ratingByClass"]
         self.rating_by_solved_count: int = data["ratingBySolvedCount"]
