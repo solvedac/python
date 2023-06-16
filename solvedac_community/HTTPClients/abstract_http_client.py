@@ -20,11 +20,12 @@ from solvedac_community.HTTPClients.httpclient import ResponseData, Route
 
 
 class AbstractHTTPClient(metaclass=ABCMeta):
-
     @abstractmethod
     def __init__(self):
         pass
 
     @abstractmethod
-    async def request(self, route: Route, headers: Optional[Dict[str, str]] = None) -> ResponseData:
+    async def request(
+        self, route: Route, headers: Optional[Dict[str, str]] = None, body: Optional[Dict[str, str]] = None
+    ) -> ResponseData:
         pass
