@@ -16,20 +16,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 from dataclasses import dataclass
 from typing import Dict
 
-from .problem_level import ProblemLevel
+from solvedac_community.Schemas.Enums.problem_level import ProblemLevel
 
 
 @dataclass
-class ProblemStats:
+class ProblemLevelData:
     level: ProblemLevel
-    total: int
-    solved: int
-    tried: int
-    partial: int
+    count: int
 
     def __init__(self, data: Dict[str, int]):
         self.level = ProblemLevel(data["level"])
-        self.total = data["total"]
-        self.solved = data["solved"]
-        self.tried = data["tried"]
-        self.partial = data["partial"]
+        self.count = data["count"]

@@ -17,9 +17,9 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Dict, Union, List
 
-from .auto_completion_data import SimplifiedUser
-from .settings import Settings
-from ..utils import get_datetime_from_string
+from solvedac_community.Schemas.Models.auto_completion_data import SimplifiedUser
+from solvedac_community.Schemas.Models.settings import Settings
+from solvedac_community.utils import get_datetime_from_string
 
 
 @dataclass

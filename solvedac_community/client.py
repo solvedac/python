@@ -34,31 +34,31 @@ class Client:
         self.http_client = get_http_client(self.loop, solvedac_token=solvedac_token, lib=http_library)
         self.has_token = bool(solvedac_token)
 
-    async def get_user(self, handle: str) -> User:
+    async def get_user(self, handle: str) -> Models.User:
         response: ResponseData = await self.http_client.request(
             Route(RequestMethod.GET, f"/user/show", params={"handle": handle})
         )
         assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         json_data: dict = json.loads(response.response_data)
-        return User(json_data)
+        return Models.User(json_data)
 
-    async def get_user_organizations(self, handle: str) -> List[Organization]:
+    async def get_user_organizations(self, handle: str) -> List[Models.Organization]:
         response: ResponseData = await self.http_client.request(
             Route(RequestMethod.GET, f"/user/organizations", params={"handle": handle})
         )
         assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         json_data: dict = json.loads(response.response_data)
-        return [Organization(dat) for dat in json_data]
+        return [Models.Organization(dat) for dat in json_data]
 
-    async def get_user_problem_stats(self, handle: str) -> List[ProblemStats]:
+    async def get_user_problem_stats(self, handle: str) -> List[Models.ProblemStats]:
         response: ResponseData = await self.http_client.request(
             Route(RequestMethod.GET, f"/user/problem_stats", params={"handle": handle})
         )
         assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         json_data: dict = json.loads(response.response_data)
-        return [ProblemStats(dat) for dat in json_data]
+        return [Models.ProblemStats(dat) for dat in json_data]
 
-    async def get_background(self, background_id: str) -> Background:
+    async def get_background(self, background_id: str) -> Models.Background:
         response: ResponseData = await self.http_client.request(
             Route(
                 RequestMethod.GET,
@@ -68,15 +68,15 @@ class Client:
         )
         assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         json_data: dict = json.loads(response.response_data)
-        return Background(json_data)
+        return Models.Background(json_data)
 
-    async def get_badge(self, badge_id: str) -> Badge:
+    async def get_badge(self, badge_id: str) -> Models.Badge:
         response: ResponseData = await self.http_client.request(
             Route(RequestMethod.GET, f"/badge/show", params={"badgeId": badge_id})
         )
         assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         json_data: dict = json.loads(response.response_data)
-        return Badge(json_data)
+        return Models.Badge(json_data)
 
     async def get_coins_exchange_rate(self) -> int:
         response: ResponseData = await self.http_client.request(Route(RequestMethod.GET, f"/coins/exchange_rate"))
@@ -84,48 +84,48 @@ class Client:
         json_data: dict = json.loads(response.response_data)
         return json_data["rate"]
 
-    async def get_coinshop_products(self) -> List[CoinshopProduct]:
+    async def get_coinshop_products(self) -> List[Models.CoinshopProduct]:
         response: ResponseData = await self.http_client.request(Route(RequestMethod.GET, f"/coins/shop/list"))
         assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         json_data: dict = json.loads(response.response_data)
-        return [CoinshopProduct(d) for d in json_data]
+        return [Models.CoinshopProduct(d) for d in json_data]
 
-    async def get_site_stats(self) -> SolvedAcStatistics:
+    async def get_site_stats(self) -> Models.SolvedAcStatistics:
         response: ResponseData = await self.http_client.request(Route(RequestMethod.GET, f"/site/stats"))
         assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         json_data: dict = json.loads(response.response_data)
-        return SolvedAcStatistics(json_data)
+        return Models.SolvedAcStatistics(json_data)
 
-    async def get_problem_by_id(self, problem_id: int) -> TaggedProblem:
+    async def get_problem_by_id(self, problem_id: int) -> Models.TaggedProblem:
         response: ResponseData = await self.http_client.request(
             Route(RequestMethod.GET, f"/problem/show", params={"problemId": problem_id})
         )
         assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         json_data: dict = json.loads(response.response_data)
-        return TaggedProblem(json_data)
+        return Models.TaggedProblem(json_data)
 
-    async def get_problem_by_id_array(self, problem_ids: Iterable[Union[int, str]]) -> List[TaggedProblem]:
+    async def get_problem_by_id_array(self, problem_ids: Iterable[Union[int, str]]) -> List[Models.TaggedProblem]:
         query = ",".join(map(str, problem_ids))
         response: ResponseData = await self.http_client.request(
             Route(RequestMethod.GET, f"/problem/lookup", params={"problemIds": query})
         )
         assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         json_data: dict = json.loads(response.response_data)
-        return [TaggedProblem(d) for d in json_data]
+        return [Models.TaggedProblem(d) for d in json_data]
 
-    async def get_problem_level(self) -> List[ProblemLevelData]:
+    async def get_problem_level(self) -> List[Models.ProblemLevelData]:
         response: ResponseData = await self.http_client.request(Route(RequestMethod.GET, f"/problem/level"))
         assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         json_data: dict = json.loads(response.response_data)
-        return [ProblemLevelData(d) for d in json_data]
+        return [Models.ProblemLevelData(d) for d in json_data]
 
     async def search_problem(
         self,
         query: str,
-        direction: Union[SortDirection, str],
+        direction: Union[Enums.SortDirection, str],
         page: int,
-        sort: Union[SortType, str],
-    ) -> ProblemSearchData:
+        sort: Union[Enums.SortType, str],
+    ) -> Models.ProblemSearchData:
         response: ResponseData = await self.http_client.request(
             Route(
                 RequestMethod.GET,
@@ -135,19 +135,19 @@ class Client:
         )
         assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         json_data: dict = json.loads(response.response_data)
-        return ProblemSearchData(json_data)
+        return Models.ProblemSearchData(json_data)
 
-    async def get_search_auto_completion(self, query: str) -> AutoCompletionData:
+    async def get_search_auto_completion(self, query: str) -> Models.AutoCompletionData:
         response: ResponseData = await self.http_client.request(
             Route(RequestMethod.GET, f"/search/suggestion", params={"query": query})
         )
         assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         json_data: dict = json.loads(response.response_data)
-        return AutoCompletionData(json_data)
+        return Models.AutoCompletionData(json_data)
 
-    async def verify_account_credentials(self) -> AccountInfo:
+    async def verify_account_credentials(self) -> Models.AccountInfo:
         response: ResponseData = await self.http_client.request(Route(RequestMethod.GET, "/account/verify_credentials"))
 
         assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         json_data: dict = json.loads(response.response_data)
-        return AccountInfo(json_data)
+        return Models.AccountInfo(json_data)

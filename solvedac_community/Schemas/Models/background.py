@@ -16,7 +16,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 from dataclasses import dataclass
 from typing import Dict, Union, List
 
-from .author import Author
+from solvedac_community.Schemas.Models.author import Author
 
 
 @dataclass()

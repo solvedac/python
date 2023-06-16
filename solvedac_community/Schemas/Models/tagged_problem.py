@@ -14,17 +14,24 @@ OTHER DEALINGS IN THE SOFTWARE.
 """
 
 from dataclasses import dataclass
-from typing import Dict, Union
+from typing import Dict, Union, List
 
-from .problem_level import ProblemLevel
+from solvedac_community.Schemas.Enums.problem_level import ProblemLevel
+from .problem_tag import ProblemTag
 
 
 @dataclass
-class Problem:
+class TaggedProblem:
     problem_id: int
     title_ko: str
     is_solvable: bool
     is_partial: bool
+    accepted_user_count: int
+    level: ProblemLevel
+    voted_user_count: int
+    is_level_locked: bool
+    average_tries: float
+    tags: List[ProblemTag]
 
     def __init__(self, data: Dict[str, Union[int, str, bool, list]]):
         self.problem_id: int = data["problemId"]
@@ -36,3 +43,4 @@ class Problem:
         self.voted_user_count: int = data["votedUserCount"]
         self.is_level_locked: bool = data["isLevelLocked"]
         self.average_tries: float = data["averageTries"]
+        self.tags: List[ProblemTag] = [ProblemTag(tag) for tag in data["tags"]]

@@ -13,5 +13,11 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from . import Enums
-from . import Models
+from .badge_category import BadgeCategory
+from .badge_tier import BadgeTier
+from .class_decoration import ClassDecoration
+from .price_unit import PriceUnit
+from .problem_level import ProblemLevel
+from .sort_direction import SortDirection
+from .sort_type import SortType
+from .user_tier import UserTier
