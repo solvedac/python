@@ -13,18 +13,23 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from abc import ABCMeta, abstractmethod
-from typing import Optional, Dict
+from dataclasses import dataclass
+from typing import Dict
 
-from solvedac_community.HTTPClients.httpclient import ResponseData, Route
+from solvedac_community.Schemas.Enums.problem_level import ProblemLevel
 
 
-class AbstractHTTPClient(metaclass=ABCMeta):
+@dataclass
+class ProblemStats:
+    level: ProblemLevel
+    total: int
+    solved: int
+    tried: int
+    partial: int
 
-    @abstractmethod
-    def __init__(self):
-        pass
-
-    @abstractmethod
-    async def request(self, route: Route, headers: Optional[Dict[str, str]] = None) -> ResponseData:
-        pass
+    def __init__(self, data: Dict[str, int]):
+        self.level = ProblemLevel(data["level"])
+        self.total = data["total"]
+        self.solved = data["solved"]
+        self.tried = data["tried"]
+        self.partial = data["partial"]

@@ -13,18 +13,5 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from abc import ABCMeta, abstractmethod
-from typing import Optional, Dict
-
-from solvedac_community.HTTPClients.httpclient import ResponseData, Route
-
-
-class AbstractHTTPClient(metaclass=ABCMeta):
-
-    @abstractmethod
-    def __init__(self):
-        pass
-
-    @abstractmethod
-    async def request(self, route: Route, headers: Optional[Dict[str, str]] = None) -> ResponseData:
-        pass
+from . import Enums
+from . import Models

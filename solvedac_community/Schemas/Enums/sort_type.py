@@ -13,14 +13,19 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from .author import Author
-from .background import Background
-from .badge import Badge
-from .coinshop_product import CoinshopProduct
-from .organization import Organization
-from .problem_level import ProblemLevel
-from .problem_level_data import ProblemLevelData
-from .problem_stats import ProblemStats
-from .solvedac_statistics import SolvedAcStatistics
-from .tagged_problem import TaggedProblem
-from .user import User
+from enum import Enum
+
+
+class SortType(Enum):
+    def __str__(self):
+        return self.value
+
+    def __repr__(self):
+        return self.value
+
+    ID = "id"
+    LEVEL = "level"
+    TITLE = "title"
+    SOLVED = "solved"
+    AVERAGE_TRY = "average_try"
+    RANDOM = "random"

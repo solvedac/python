@@ -15,7 +15,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 from dataclasses import dataclass
 from typing import Dict
-from .problem_level import ProblemLevel
+
+from solvedac_community.Schemas.Enums.problem_level import ProblemLevel
 
 
 @dataclass

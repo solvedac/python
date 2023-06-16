@@ -18,8 +18,8 @@ from typing import ClassVar, Optional, Union, Dict
 
 import httpx
 
-from .abstract_http_client import AbstractHTTPClient
-from .httpclient import ResponseData, Route
+from solvedac_community.HTTPClients.abstract_http_client import AbstractHTTPClient
+from solvedac_community.HTTPClients.httpclient import ResponseData, Route
 
 
 class HttpxHTTPClient(AbstractHTTPClient):

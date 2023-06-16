@@ -16,24 +16,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 from dataclasses import dataclass
 from typing import Dict, Union, List
 
+from .problem import Problem
+
 
 @dataclass
-class Organization:
-    organization_id: int
-    name: str
-    type: str
-    rating: int
-    user_count: int
-    vote_count: int
-    solved_count: int
-    color: str
+class ProblemSearchData:
+    count: int
+    items: List[Problem]
 
-    def __init__(self, data: Dict[str, Union[str, int]]):
-        self.organization_id: int = data["organizationId"]
-        self.name: str = data["name"]
-        self.type: str = data["type"]
-        self.rating: int = data["rating"]
-        self.user_count: int = data["userCount"]
-        self.vote_count: int = data["voteCount"]
-        self.solved_count: int = data["solvedCount"]
-        self.color: str = data["color"]
+    def __init__(self, data: Dict[str, Union[int, list]]):
+        self.count: int = data["count"]
+        self.items: List[Problem] = [Problem(dat) for dat in data["items"]]
