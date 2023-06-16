@@ -32,6 +32,7 @@ class Client:
             pass
         self.loop = asyncio.get_event_loop()
         self.http_client = get_http_client(self.loop, solvedac_token=solvedac_token, lib=http_library)
+        self.has_token = bool(solvedac_token)
 
     async def get_user(self, handle: str) -> User:
         response: ResponseData = await self.http_client.request(
@@ -143,3 +144,10 @@ class Client:
         assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         json_data: dict = json.loads(response.response_data)
         return AutoCompletionData(json_data)
+
+    async def verify_account_credentials(self) -> AccountInfo:
+        response: ResponseData = await self.http_client.request(Route(RequestMethod.GET, "/account/verify_credentials"))
+
+        assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
+        json_data: dict = json.loads(response.response_data)
+        return AccountInfo(json_data)
