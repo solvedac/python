@@ -25,11 +25,6 @@ from .httpclient import ResponseData, Route
 class HttpxHTTPClient(AbstractHTTPClient):
     USER_AGENT: ClassVar[str] = "Mozilla/5.0"
 
-    def __new__(cls, *args, **kwargs):
-        if not hasattr(cls, "_instance"):
-            cls._instance = super().__new__(cls)
-        return cls._instance
-
     def __init__(self, loop: asyncio.AbstractEventLoop, solvedac_token: Optional[str] = None) -> None:
         self.loop: asyncio.AbstractEventLoop = loop
         self.lock: asyncio.Lock = asyncio.Lock()

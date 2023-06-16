@@ -20,10 +20,6 @@ from .httpclient import ResponseData, Route
 
 
 class AbstractHTTPClient(metaclass=ABCMeta):
-    def __new__(cls, *args, **kwargs):
-        if not hasattr(cls, "_instance"):
-            cls._instance = super().__new__(cls)
-        return cls._instance
 
     @abstractmethod
     def __init__(self):
