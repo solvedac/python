@@ -14,7 +14,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 """
 
 from dataclasses import dataclass
-from typing import Dict, Union
 
 
 @dataclass

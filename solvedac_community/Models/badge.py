@@ -16,8 +16,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 from dataclasses import dataclass
 from typing import Dict
 
-from .badge_tier import BadgeTier
 from .badge_category import BadgeCategory
+from .badge_tier import BadgeTier
 
 
 @dataclass

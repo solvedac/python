@@ -13,13 +13,13 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from datetime import datetime
 from dataclasses import dataclass
+from datetime import datetime
+from typing import Dict, Union, List
+
 from .auto_completion_data import SimplifiedUser
 from .settings import Settings
 from ..utils import get_datetime_from_string
-
-from typing import Dict, Union, List
 
 
 @dataclass

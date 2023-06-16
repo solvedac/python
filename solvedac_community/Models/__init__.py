@@ -13,6 +13,7 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 """
 
+from .account_info import AccountInfo
 from .author import Author
 from .auto_completion_data import AutoCompletionData
 from .background import Background
@@ -28,4 +29,3 @@ from .sort_direction import SortDirection
 from .sort_type import SortType
 from .tagged_problem import TaggedProblem
 from .user import User
-from .account_info import AccountInfo

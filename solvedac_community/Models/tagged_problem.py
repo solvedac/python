@@ -16,8 +16,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 from dataclasses import dataclass
 from typing import Dict, Union, List
 
-from .problem_tag import ProblemTag
 from .problem_level import ProblemLevel
+from .problem_tag import ProblemTag
 
 
 @dataclass

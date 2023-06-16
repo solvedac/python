@@ -14,7 +14,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 """
 
 from dataclasses import dataclass
-from typing import Dict, Union
+from typing import Dict
 
 from .problem_level import ProblemLevel
 
