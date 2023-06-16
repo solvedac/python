@@ -18,7 +18,7 @@ import json
 from typing import Optional, List, Iterable, Union
 
 from .HTTPClients import *
-from .Models import *
+from .Schemas import *
 
 
 class Client:
