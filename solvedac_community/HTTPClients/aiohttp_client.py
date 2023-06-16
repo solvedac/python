@@ -19,8 +19,8 @@ from typing import ClassVar, Optional, Union, Dict
 
 import aiohttp
 
-from .abstract_http_client import AbstractHTTPClient
-from .httpclient import MISSING, ResponseData, Route
+from solvedac_community.HTTPClients.abstract_http_client import AbstractHTTPClient
+from solvedac_community.HTTPClients.httpclient import MISSING, ResponseData, Route
 
 
 class AiohttpHTTPClient(AbstractHTTPClient):

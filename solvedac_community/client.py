@@ -17,8 +17,8 @@ import asyncio
 import json
 from typing import Optional, List, Iterable, Union
 
-from .HTTPClients import *
-from .Schemas import *
+from solvedac_community.HTTPClients import *
+from solvedac_community.Schemas import *
 
 
 class Client:
