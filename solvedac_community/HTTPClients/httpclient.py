@@ -87,14 +87,14 @@ class Route:
     def __init__(self, method: RequestMethod, url: str, params: Optional[Dict[str, Any]] = None) -> None:
         if params:
             url = self.__make_url(url, params)
-        (self.url): str = self.BASE_URL + url
-        (self.method): RequestMethod = method
+        self.url: str = self.BASE_URL + url
+        self.method: RequestMethod = method
 
 
 class ResponseData:
     def __init__(self, text: str, status: int) -> None:
-        (self.response_data): str = text
-        (self.status): int = status
+        self.response_data: str = text
+        self.status: int = status
 
     def __str__(self) -> str:
         return f"status_code : {self.status}\nresponse_data : {self.response_data}"
