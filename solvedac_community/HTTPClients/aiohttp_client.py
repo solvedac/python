@@ -39,7 +39,9 @@ class AiohttpHTTPClient(AbstractHTTPClient):
         else:
             self.session = aiohttp.ClientSession()
 
-    async def request(self, route: Route, headers: Optional[Dict[str, str]] = None) -> ResponseData:
+    async def request(
+        self, route: Route, headers: Optional[Dict[str, str]] = None, body: Optional[Dict[str, str]] = None
+    ) -> ResponseData:
         if not headers:
             headers = {}
 
@@ -50,7 +52,9 @@ class AiohttpHTTPClient(AbstractHTTPClient):
             await self.__create_session()
 
         async with self.lock:
-            async with self.session.request(method=route.method.name, url=route.url, headers=headers) as response:
+            async with self.session.request(
+                method=route.method.name, url=route.url, headers=headers, json=body
+            ) as response:
                 status: int = response.status
                 text: str = await response.text(encoding="utf-8")
                 return ResponseData(text, status)

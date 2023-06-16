@@ -30,7 +30,9 @@ class HttpxHTTPClient(AbstractHTTPClient):
         self.lock: asyncio.Lock = asyncio.Lock()
         self.solvedac_token: Union[str, None] = solvedac_token
 
-    async def request(self, route: Route, headers: Optional[Dict[str, str]] = None) -> ResponseData:
+    async def request(
+        self, route: Route, headers: Optional[Dict[str, str]] = None, body: Optional[Dict[str, str]] = None
+    ) -> ResponseData:
         if not headers:
             headers = {}
 
@@ -42,7 +44,7 @@ class HttpxHTTPClient(AbstractHTTPClient):
                 cookies={"solvedacToken": self.solvedac_token} if self.solvedac_token else None
             ) as client:
                 response: httpx.Response = await client.request(
-                    method=route.method.name, url=route.url, headers=headers
+                    method=route.method.name, url=route.url, headers=headers, json=body
                 )
                 status: int = response.status_code
                 text: str = response.text
