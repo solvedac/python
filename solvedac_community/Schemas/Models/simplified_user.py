@@ -13,20 +13,20 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from dataclasses import dataclass
-from typing import Dict, Any, Union
 import datetime
+from dataclasses import dataclass
+from typing import Dict, Union
 
-from .user_tier import UserTier
-from .class_decoration import ClassDecoration
-from ..utils import get_datetime_from_string
+from solvedac_community.Schemas.Enums.class_decoration import ClassDecoration
+from solvedac_community.Schemas.Enums.user_tier import UserTier
+from solvedac_community.utils import get_datetime_from_string
 
 
 @dataclass
-class User:
+class SimplifiedUser:
     handle: str
     bio: str
-    badge_id: Union[str, None]
+    badge_id: str
     background_id: str
     profile_image_url: Union[str, None]
     solved_count: int
@@ -34,9 +34,8 @@ class User:
     class_rating: int
     class_decoration: ClassDecoration
     rival_count: int
-    reverse_rival_count: int
     tier: UserTier
-    rank: int
+    rating: int
     rating_by_problems_sum: int
     rating_by_class: int
     rating_by_solved_count: int
@@ -62,7 +61,6 @@ class User:
         self.reverse_rival_count: int = data["reverseRivalCount"]
         self.tier: UserTier = UserTier(data["tier"])
         self.rating: int = data["rating"]
-        self.rank: int = data["rank"]
         self.rating_by_problems_sum: int = data["ratingByProblemsSum"]
         self.rating_by_class: int = data["ratingByClass"]
         self.rating_by_solved_count: int = data["ratingBySolvedCount"]

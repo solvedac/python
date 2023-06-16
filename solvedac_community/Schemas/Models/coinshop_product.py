@@ -14,10 +14,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 """
 
 from dataclasses import dataclass
-from typing import Dict, Optional, Union
+from typing import Dict, Union
 
-from .item import Item
-from .price_unit import PriceUnit
+from solvedac_community.Schemas.Enums.price_unit import PriceUnit
+from solvedac_community.Schemas.Models.item import Item
 
 
 @dataclass()

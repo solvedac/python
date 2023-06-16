@@ -13,18 +13,19 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from abc import ABCMeta, abstractmethod
-from typing import Optional, Dict
-
-from solvedac_community.HTTPClients.httpclient import ResponseData, Route
+from dataclasses import dataclass
+from typing import Dict, Union
 
 
-class AbstractHTTPClient(metaclass=ABCMeta):
+@dataclass
+class EmoticonInfo:
+    emoticon_id: str
+    emoticon_url: str
+    display_name: str
+    unlocked: bool
 
-    @abstractmethod
-    def __init__(self):
-        pass
-
-    @abstractmethod
-    async def request(self, route: Route, headers: Optional[Dict[str, str]] = None) -> ResponseData:
-        pass
+    def __init__(self, data: Dict[str, Union[str, bool]]):
+        self.emoticon_id = data["emoticonId"]
+        self.emoticon_url = data["emoticonUrl"]
+        self.display_name = data["displayName"]
+        self.unlocked = data["unlocked"]

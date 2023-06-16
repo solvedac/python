@@ -14,7 +14,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 """
 
 from dataclasses import dataclass
-from typing import Dict, Union
 
 
 @dataclass
@@ -41,4 +40,3 @@ class Settings:
         self.twitter_post_on_problem_solve = data.get("twitter_post_on_problem_solve", "false") == "true"
         self.twitter_post_on_rating_increase = data.get("twitter_post_on_rating_increase", "false") == "true"
         self.twitter_post_on_tier_increase = data.get("twitter_post_on_tier_increase", "false") == "true"
-

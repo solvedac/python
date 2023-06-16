@@ -36,7 +36,7 @@ def get_http_client(
     if lib is None:
         try:
             import aiohttp
-            from .aiohttp_client import AiohttpHTTPClient
+            from solvedac_community.HTTPClients.aiohttp_client import AiohttpHTTPClient
 
             return AiohttpHTTPClient(loop, solvedac_token)
         except ImportError:
@@ -44,7 +44,7 @@ def get_http_client(
 
         try:
             import httpx
-            from .httpx_client import HttpxHTTPClient
+            from solvedac_community.HTTPClients.httpx_client import HttpxHTTPClient
 
             return HttpxHTTPClient(loop, solvedac_token)
         except ImportError:
@@ -53,12 +53,12 @@ def get_http_client(
         raise ImportError("At least one of aiohttp or httpx libraries is required")
 
     if lib == HTTPClientLibrary.HTTPX:
-        from .httpx_client import HttpxHTTPClient
+        from solvedac_community.HTTPClients.httpx_client import HttpxHTTPClient
 
         return HttpxHTTPClient(loop, solvedac_token)
 
     elif lib == HTTPClientLibrary.AIOHTTP:
-        from .aiohttp_client import AiohttpHTTPClient
+        from solvedac_community.HTTPClients.aiohttp_client import AiohttpHTTPClient
 
         return AiohttpHTTPClient(loop, solvedac_token)
 
@@ -87,14 +87,14 @@ class Route:
     def __init__(self, method: RequestMethod, url: str, params: Optional[Dict[str, Any]] = None) -> None:
         if params:
             url = self.__make_url(url, params)
-        (self.url): str = self.BASE_URL + url
-        (self.method): RequestMethod = method
+        self.url: str = self.BASE_URL + url
+        self.method: RequestMethod = method
 
 
 class ResponseData:
     def __init__(self, text: str, status: int) -> None:
-        (self.response_data): str = text
-        (self.status): int = status
+        self.response_data: str = text
+        self.status: int = status
 
     def __str__(self) -> str:
         return f"status_code : {self.status}\nresponse_data : {self.response_data}"

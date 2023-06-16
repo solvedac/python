@@ -13,27 +13,14 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from datetime import datetime
 from dataclasses import dataclass
-from .auto_completion_data import SimplifiedUser
-from .settings import Settings
-from ..utils import get_datetime_from_string
-
+from datetime import datetime
 from typing import Dict, Union, List
 
-
-@dataclass
-class EmoticonInfo:
-    emoticon_id: str
-    emoticon_url: str
-    display_name: str
-    unlocked: bool
-
-    def __init__(self, data: Dict[str, Union[str, bool]]):
-        self.emoticon_id = data["emoticonId"]
-        self.emoticon_url = data["emoticonUrl"]
-        self.display_name = data["displayName"]
-        self.unlocked = data["unlocked"]
+from solvedac_community.Schemas.Models.auto_completion_data import SimplifiedUser
+from solvedac_community.Schemas.Models.emoticon_info import EmoticonInfo
+from solvedac_community.Schemas.Models.settings import Settings
+from solvedac_community.utils import get_datetime_from_string
 
 
 @dataclass
