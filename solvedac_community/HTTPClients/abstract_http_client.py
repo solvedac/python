@@ -16,7 +16,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 from abc import ABCMeta, abstractmethod
 from typing import Optional, Dict
 
-from .httpclient import ResponseData, Route
+from solvedac_community.HTTPClients.httpclient import ResponseData, Route
 
 
 class AbstractHTTPClient(metaclass=ABCMeta):
