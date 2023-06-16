@@ -28,3 +28,4 @@ from .sort_direction import SortDirection
 from .sort_type import SortType
 from .tagged_problem import TaggedProblem
 from .user import User
+from .account_info import AccountInfo
