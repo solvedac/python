@@ -151,3 +151,10 @@ class Client:
         assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
         json_data: dict = json.loads(response.response_data)
         return Models.AccountInfo(json_data)
+
+    async def update_account_settings(self, key: str, value: str) -> None:
+        response: ResponseData = await self.http_client.request(
+            Route(RequestMethod.PATCH, "/account/update_settings"), body={"key" : key, "value" :  value}
+        )
+
+        assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status

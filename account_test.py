@@ -16,6 +16,9 @@ class Test(unittest.TestCase):
         print(loop.run_until_complete(client1.verify_account_credentials()))
         print(loop.run_until_complete(client2.verify_account_credentials()))
 
+    def test_update_account_settings(self):
+        print(loop.run_until_complete(client1.update_account_settings("screenTheme", "dark")))
+
 
 if __name__ == "__main__":
     unittest.main()
