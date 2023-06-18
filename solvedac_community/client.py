@@ -39,7 +39,9 @@ class Client:
         response: ResponseData = await self.http_client.request(
             Route(RequestMethod.GET, f"/user/show", params={"handle": handle})
         )
+
         check_stats_code(response.status)
+
         json_data: dict = json.loads(response.response_data)
         return Models.User(json_data)
 
@@ -47,7 +49,9 @@ class Client:
         response: ResponseData = await self.http_client.request(
             Route(RequestMethod.GET, f"/user/organizations", params={"handle": handle})
         )
+
         check_stats_code(response.status)
+
         json_data: dict = json.loads(response.response_data)
         return [Models.Organization(dat) for dat in json_data]
 
@@ -55,7 +59,9 @@ class Client:
         response: ResponseData = await self.http_client.request(
             Route(RequestMethod.GET, f"/user/problem_stats", params={"handle": handle})
         )
+
         check_stats_code(response.status)
+
         json_data: dict = json.loads(response.response_data)
         return [Models.ProblemStats(dat) for dat in json_data]
 
@@ -67,7 +73,9 @@ class Client:
                 params={"backgroundId": background_id},
             )
         )
+
         check_stats_code(response.status)
+
         json_data: dict = json.loads(response.response_data)
         return Models.Background(json_data)
 
@@ -75,25 +83,33 @@ class Client:
         response: ResponseData = await self.http_client.request(
             Route(RequestMethod.GET, f"/badge/show", params={"badgeId": badge_id})
         )
+
         check_stats_code(response.status)
+
         json_data: dict = json.loads(response.response_data)
         return Models.Badge(json_data)
 
     async def get_coins_exchange_rate(self) -> int:
         response: ResponseData = await self.http_client.request(Route(RequestMethod.GET, f"/coins/exchange_rate"))
+
         check_stats_code(response.status)
+
         json_data: dict = json.loads(response.response_data)
         return json_data["rate"]
 
     async def get_coinshop_products(self) -> List[Models.CoinshopProduct]:
         response: ResponseData = await self.http_client.request(Route(RequestMethod.GET, f"/coins/shop/list"))
+
         check_stats_code(response.status)
+
         json_data: dict = json.loads(response.response_data)
         return [Models.CoinshopProduct(d) for d in json_data]
 
     async def get_site_stats(self) -> Models.SolvedAcStatistics:
         response: ResponseData = await self.http_client.request(Route(RequestMethod.GET, f"/site/stats"))
+
         check_stats_code(response.status)
+
         json_data: dict = json.loads(response.response_data)
         return Models.SolvedAcStatistics(json_data)
 
@@ -101,7 +117,9 @@ class Client:
         response: ResponseData = await self.http_client.request(
             Route(RequestMethod.GET, f"/problem/show", params={"problemId": problem_id})
         )
+
         check_stats_code(response.status)
+
         json_data: dict = json.loads(response.response_data)
         return Models.TaggedProblem(json_data)
 
@@ -110,13 +128,17 @@ class Client:
         response: ResponseData = await self.http_client.request(
             Route(RequestMethod.GET, f"/problem/lookup", params={"problemIds": query})
         )
+
         check_stats_code(response.status)
+
         json_data: dict = json.loads(response.response_data)
         return [Models.TaggedProblem(d) for d in json_data]
 
     async def get_problem_level(self) -> List[Models.ProblemLevelData]:
         response: ResponseData = await self.http_client.request(Route(RequestMethod.GET, f"/problem/level"))
+
         check_stats_code(response.status)
+
         json_data: dict = json.loads(response.response_data)
         return [Models.ProblemLevelData(d) for d in json_data]
 
@@ -134,7 +156,9 @@ class Client:
                 params={"query": query, "direction": str(direction), "page": page, "sort": str(sort)},
             )
         )
+
         check_stats_code(response.status)
+
         json_data: dict = json.loads(response.response_data)
         return Models.ProblemSearchData(json_data)
 
@@ -142,7 +166,9 @@ class Client:
         response: ResponseData = await self.http_client.request(
             Route(RequestMethod.GET, f"/search/suggestion", params={"query": query})
         )
+
         check_stats_code(response.status)
+
         json_data: dict = json.loads(response.response_data)
         return Models.AutoCompletionData(json_data)
 
@@ -150,12 +176,13 @@ class Client:
         response: ResponseData = await self.http_client.request(Route(RequestMethod.GET, "/account/verify_credentials"))
 
         check_stats_code(response.status)
+
         json_data: dict = json.loads(response.response_data)
         return Models.AccountInfo(json_data)
 
     async def update_account_settings(self, key: str, value: str) -> None:
         response: ResponseData = await self.http_client.request(
-            Route(RequestMethod.PATCH, "/account/update_settings"), body={"key" : key, "value" :  value}
+            Route(RequestMethod.PATCH, "/account/update_settings"), body={"key": key, "value": value}
         )
 
         check_stats_code(response.status)
