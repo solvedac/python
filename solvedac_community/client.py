@@ -157,4 +157,4 @@ class Client:
             Route(RequestMethod.PATCH, "/account/update_settings"), body={"key" : key, "value" :  value}
         )
 
-        assert response.status == 200, "HTTP Response Status Code is not 200\nStatus Code : %d" % response.status
+        assert response.status == 204, "HTTP Response Status Code is not 204\nStatus Code : %d" % response.status
