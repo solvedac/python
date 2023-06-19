@@ -23,20 +23,21 @@ from solvedac_community.utils import check_stats_code
 
 
 class Client:
-    loop: asyncio.AbstractEventLoop
-    http_client: AbstractHTTPClient
+    __loop: asyncio.AbstractEventLoop
+    __http_client: AbstractHTTPClient
+    __has_token: bool
 
     def __init__(self, solvedac_token: Optional[str] = None, http_library: HTTPClientLibrary = None) -> None:
         try:
             asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
         except AttributeError:
             pass
-        self.loop = asyncio.get_event_loop()
-        self.http_client = get_http_client(self.loop, solvedac_token=solvedac_token, lib=http_library)
-        self.has_token = bool(solvedac_token)
+        self.__loop = asyncio.get_event_loop()
+        self.__http_client = get_http_client(self.__loop, solvedac_token=solvedac_token, lib=http_library)
+        self.__has_token = bool(solvedac_token)
 
     async def get_user(self, handle: str) -> Models.User:
-        response: ResponseData = await self.http_client.request(
+        response: ResponseData = await self.__http_client.request(
             Route(RequestMethod.GET, f"/user/show", params={"handle": handle})
         )
 
@@ -46,7 +47,7 @@ class Client:
         return Models.User(json_data)
 
     async def get_user_organizations(self, handle: str) -> List[Models.Organization]:
-        response: ResponseData = await self.http_client.request(
+        response: ResponseData = await self.__http_client.request(
             Route(RequestMethod.GET, f"/user/organizations", params={"handle": handle})
         )
 
@@ -56,7 +57,7 @@ class Client:
         return [Models.Organization(dat) for dat in json_data]
 
     async def get_user_problem_stats(self, handle: str) -> List[Models.ProblemStats]:
-        response: ResponseData = await self.http_client.request(
+        response: ResponseData = await self.__http_client.request(
             Route(RequestMethod.GET, f"/user/problem_stats", params={"handle": handle})
         )
 
@@ -66,7 +67,7 @@ class Client:
         return [Models.ProblemStats(dat) for dat in json_data]
 
     async def get_background(self, background_id: str) -> Models.Background:
-        response: ResponseData = await self.http_client.request(
+        response: ResponseData = await self.__http_client.request(
             Route(
                 RequestMethod.GET,
                 f"/background/show",
@@ -80,7 +81,7 @@ class Client:
         return Models.Background(json_data)
 
     async def get_badge(self, badge_id: str) -> Models.Badge:
-        response: ResponseData = await self.http_client.request(
+        response: ResponseData = await self.__http_client.request(
             Route(RequestMethod.GET, f"/badge/show", params={"badgeId": badge_id})
         )
 
@@ -90,7 +91,7 @@ class Client:
         return Models.Badge(json_data)
 
     async def get_coins_exchange_rate(self) -> int:
-        response: ResponseData = await self.http_client.request(Route(RequestMethod.GET, f"/coins/exchange_rate"))
+        response: ResponseData = await self.__http_client.request(Route(RequestMethod.GET, f"/coins/exchange_rate"))
 
         check_stats_code(response.status)
 
@@ -98,7 +99,7 @@ class Client:
         return json_data["rate"]
 
     async def get_coinshop_products(self) -> List[Models.CoinshopProduct]:
-        response: ResponseData = await self.http_client.request(Route(RequestMethod.GET, f"/coins/shop/list"))
+        response: ResponseData = await self.__http_client.request(Route(RequestMethod.GET, f"/coins/shop/list"))
 
         check_stats_code(response.status)
 
@@ -106,7 +107,7 @@ class Client:
         return [Models.CoinshopProduct(d) for d in json_data]
 
     async def get_site_stats(self) -> Models.SolvedAcStatistics:
-        response: ResponseData = await self.http_client.request(Route(RequestMethod.GET, f"/site/stats"))
+        response: ResponseData = await self.__http_client.request(Route(RequestMethod.GET, f"/site/stats"))
 
         check_stats_code(response.status)
 
@@ -114,7 +115,7 @@ class Client:
         return Models.SolvedAcStatistics(json_data)
 
     async def get_problem_by_id(self, problem_id: int) -> Models.TaggedProblem:
-        response: ResponseData = await self.http_client.request(
+        response: ResponseData = await self.__http_client.request(
             Route(RequestMethod.GET, f"/problem/show", params={"problemId": problem_id})
         )
 
@@ -125,7 +126,7 @@ class Client:
 
     async def get_problem_by_id_array(self, problem_ids: Iterable[Union[int, str]]) -> List[Models.TaggedProblem]:
         query = ",".join(map(str, problem_ids))
-        response: ResponseData = await self.http_client.request(
+        response: ResponseData = await self.__http_client.request(
             Route(RequestMethod.GET, f"/problem/lookup", params={"problemIds": query})
         )
 
@@ -135,7 +136,7 @@ class Client:
         return [Models.TaggedProblem(d) for d in json_data]
 
     async def get_problem_level(self) -> List[Models.ProblemLevelData]:
-        response: ResponseData = await self.http_client.request(Route(RequestMethod.GET, f"/problem/level"))
+        response: ResponseData = await self.__http_client.request(Route(RequestMethod.GET, f"/problem/level"))
 
         check_stats_code(response.status)
 
@@ -149,7 +150,7 @@ class Client:
         page: int,
         sort: Union[Enums.SortType, str],
     ) -> Models.ProblemSearchData:
-        response: ResponseData = await self.http_client.request(
+        response: ResponseData = await self.__http_client.request(
             Route(
                 RequestMethod.GET,
                 f"/search/problem",
@@ -163,7 +164,7 @@ class Client:
         return Models.ProblemSearchData(json_data)
 
     async def get_search_auto_completion(self, query: str) -> Models.AutoCompletionData:
-        response: ResponseData = await self.http_client.request(
+        response: ResponseData = await self.__http_client.request(
             Route(RequestMethod.GET, f"/search/suggestion", params={"query": query})
         )
 
@@ -173,7 +174,7 @@ class Client:
         return Models.AutoCompletionData(json_data)
 
     async def verify_account_credentials(self) -> Models.AccountInfo:
-        response: ResponseData = await self.http_client.request(Route(RequestMethod.GET, "/account/verify_credentials"))
+        response: ResponseData = await self.__http_client.request(Route(RequestMethod.GET, "/account/verify_credentials"))
 
         check_stats_code(response.status)
 
@@ -181,7 +182,7 @@ class Client:
         return Models.AccountInfo(json_data)
 
     async def update_account_settings(self, key: str, value: str) -> None:
-        response: ResponseData = await self.http_client.request(
+        response: ResponseData = await self.__http_client.request(
             Route(RequestMethod.PATCH, "/account/update_settings"), body={"key": key, "value": value}
         )
 
