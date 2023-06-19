@@ -18,3 +18,7 @@ import datetime
 
 def get_datetime_from_string(time: str) -> datetime.datetime:
     return datetime.datetime.strptime(time, "%Y-%m-%dT%H:%M:%S.%fZ")
+
+
+def check_stats_code(code: int) -> None:
+    assert code // 100 == 2, "API Request Failure\nStatus Code : %d" % code
