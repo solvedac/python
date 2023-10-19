@@ -14,6 +14,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 """
 
 from dataclasses import dataclass
+from typing import *
 
 __all__ = ["Settings"]
 
@@ -31,7 +32,7 @@ class Settings:
     twitter_post_on_rating_increase: bool
     twitter_post_on_tier_increase: bool
 
-    def __init__(self, data: dict[str, str]):
+    def __init__(self, data: Dict[str, str]):
         self.screen_theme = data.get("screenTheme", "white")
         self.tag_display_language = data.get("tagDisplayLanguage", "ko")
         self.icon_scheme_solved = data.get("iconSchemeSolved", "default")
