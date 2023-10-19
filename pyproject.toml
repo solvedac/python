@@ -3,12 +3,25 @@ name = "solvedac_community"
 version = "1.0.0"
 description = "An API Wrapper for SolvedAC API"
 authors = ["DevRuby <hiveruby@gmail.com>"]
+license = "MIT"
+
 readme = "README.md"
+
 packages = [{include = "solvedac_community"}]
+
+homepage = "https://solvedac.github.io/unofficial-documentation/"
+repository = "https://github.com/solvedac/python/"
+
+keywords = ["api-wrapper", "solvedac", "solvedac-api"]
+
+classifiers = [
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: Libraries"
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-aiohttp = "^3.8.4"
+aiohttp = "^3.8.6"
 
 
 [build-system]
