@@ -21,6 +21,8 @@ from solvedac_community.Schemas.Models.simplified_problem import SimplifiedProbl
 from solvedac_community.Schemas.Models.simplified_tag import SimplifiedTag
 from solvedac_community.Schemas.Models.simplified_user import SimplifiedUser
 
+__all__ = ["AutoCompletionData"]
+
 
 @dataclass
 class AutoCompletionData:

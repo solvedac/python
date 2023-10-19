@@ -16,6 +16,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 from dataclasses import dataclass
 from typing import Dict
 
+__all__ = ["TagDisplayName"]
+
 
 @dataclass
 class TagDisplayName:

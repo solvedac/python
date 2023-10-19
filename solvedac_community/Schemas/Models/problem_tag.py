@@ -18,6 +18,8 @@ from typing import Dict, List, Union
 
 from .tag_display_name import TagDisplayName
 
+__all__ = ["ProblemTag"]
+
 
 @dataclass
 class ProblemTag:

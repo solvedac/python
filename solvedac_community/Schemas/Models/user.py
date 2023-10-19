@@ -21,6 +21,8 @@ from solvedac_community.Schemas.Enums.class_decoration import ClassDecoration
 from solvedac_community.Schemas.Enums.user_tier import UserTier
 from solvedac_community.utils import get_datetime_from_string
 
+__all__ = ["User"]
+
 
 @dataclass
 class User:

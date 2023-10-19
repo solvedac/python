@@ -15,6 +15,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 from enum import Enum
 
+__all__ = ["ClassDecoration"]
+
 
 class ClassDecoration(Enum):
     def __str__(self):

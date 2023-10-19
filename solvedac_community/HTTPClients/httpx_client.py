@@ -21,6 +21,8 @@ import httpx
 from solvedac_community.HTTPClients.abstract_http_client import AbstractHTTPClient
 from solvedac_community.HTTPClients.httpclient import ResponseData, Route
 
+__all__ = ["HttpxHTTPClient"]
+
 
 class HttpxHTTPClient(AbstractHTTPClient):
     USER_AGENT: ClassVar[str] = "Mozilla/5.0"

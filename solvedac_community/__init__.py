@@ -13,6 +13,8 @@ Copyright (c) 2023 DevRuby
 
 from .client import Client
 
+__all__ = ["Client"]
+
 count = 0
 
 try:

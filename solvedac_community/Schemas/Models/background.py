@@ -18,6 +18,8 @@ from typing import Dict, Union, List
 
 from solvedac_community.Schemas.Models.author import Author
 
+__all__ = ["Background"]
+
 
 @dataclass()
 class Background:

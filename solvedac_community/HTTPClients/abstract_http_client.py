@@ -18,6 +18,8 @@ from typing import Optional, Dict
 
 from solvedac_community.HTTPClients.httpclient import ResponseData, Route
 
+__all__ = ["AbstractHTTPClient"]
+
 
 class AbstractHTTPClient(metaclass=ABCMeta):
     @abstractmethod

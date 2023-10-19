@@ -15,6 +15,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 from dataclasses import dataclass
 
+__all__ = ["Settings"]
+
 
 @dataclass
 class Settings:

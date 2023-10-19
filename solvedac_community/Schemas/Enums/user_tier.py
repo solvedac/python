@@ -16,6 +16,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 from enum import Enum
 from enum import auto
 
+__all__ = ["UserTier"]
+
 
 class UserTier(Enum):
     def __str__(self):

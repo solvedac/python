@@ -23,6 +23,9 @@ from solvedac_community.HTTPClients.abstract_http_client import AbstractHTTPClie
 from solvedac_community.HTTPClients.httpclient import MISSING, ResponseData, Route
 
 
+__all__ = ["AiohttpHTTPClient"]
+
+
 class AiohttpHTTPClient(AbstractHTTPClient):
     USER_AGENT: ClassVar[str] = "Mozilla/5.0"
 

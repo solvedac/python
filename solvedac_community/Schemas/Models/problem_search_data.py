@@ -18,6 +18,8 @@ from typing import Dict, Union, List
 
 from .problem import Problem
 
+__all__ = ["ProblemSearchData"]
+
 
 @dataclass
 class ProblemSearchData:
