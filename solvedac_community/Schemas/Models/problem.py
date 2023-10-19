@@ -18,6 +18,8 @@ from typing import Dict, Union
 
 from solvedac_community.Schemas.Enums.problem_level import ProblemLevel
 
+__all__ = ["Problem"]
+
 
 @dataclass
 class Problem:

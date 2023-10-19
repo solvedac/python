@@ -16,6 +16,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 from enum import Enum
 from enum import auto
 
+__all__ = ["ProblemLevel"]
+
 
 class ProblemLevel(Enum):
     def __str__(self):

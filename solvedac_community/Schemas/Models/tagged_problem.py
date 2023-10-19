@@ -19,6 +19,8 @@ from typing import Dict, Union, List
 from solvedac_community.Schemas.Enums.problem_level import ProblemLevel
 from .problem_tag import ProblemTag
 
+__all__ = ["TaggedProblem"]
+
 
 @dataclass
 class TaggedProblem:

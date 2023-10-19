@@ -19,6 +19,8 @@ from typing import Dict, Union
 from solvedac_community.Schemas.Enums.price_unit import PriceUnit
 from solvedac_community.Schemas.Models.item import Item
 
+__all__ = ["CoinshopProduct"]
+
 
 @dataclass()
 class CoinshopProduct:

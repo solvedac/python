@@ -19,6 +19,8 @@ from typing import Dict
 from solvedac_community.Schemas.Enums.badge_category import BadgeCategory
 from solvedac_community.Schemas.Enums.badge_tier import BadgeTier
 
+__all__ = ["Badge"]
+
 
 @dataclass
 class Badge:

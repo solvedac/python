@@ -21,6 +21,8 @@ from solvedac_community.HTTPClients import *
 from solvedac_community.Schemas import *
 from solvedac_community.utils import check_stats_code
 
+__all__ = ["Client"]
+
 
 class Client:
     __loop: asyncio.AbstractEventLoop
@@ -174,7 +176,9 @@ class Client:
         return Models.AutoCompletionData(json_data)
 
     async def verify_account_credentials(self) -> Models.AccountInfo:
-        response: ResponseData = await self.__http_client.request(Route(RequestMethod.GET, "/account/verify_credentials"))
+        response: ResponseData = await self.__http_client.request(
+            Route(RequestMethod.GET, "/account/verify_credentials")
+        )
 
         check_stats_code(response.status)
 

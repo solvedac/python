@@ -16,6 +16,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 from dataclasses import dataclass
 from typing import Dict, Union
 
+__all__ = ["Item"]
+
 
 @dataclass
 class Item:

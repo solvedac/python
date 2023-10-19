@@ -18,6 +18,8 @@ from typing import Dict
 
 from solvedac_community.Schemas.Enums.problem_level import ProblemLevel
 
+__all__ = ["ProblemStats"]
+
 
 @dataclass
 class ProblemStats:

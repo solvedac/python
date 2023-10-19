@@ -22,6 +22,8 @@ from solvedac_community.Schemas.Models.emoticon_info import EmoticonInfo
 from solvedac_community.Schemas.Models.settings import Settings
 from solvedac_community.utils import get_datetime_from_string
 
+__all__ = ["AccountInfo"]
+
 
 @dataclass
 class AccountInfo:

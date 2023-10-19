@@ -15,6 +15,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 from enum import Enum
 
+__all__ = ["SortDirection"]
+
 
 class SortDirection(Enum):
     def __str__(self):
