@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "solvedac_community"
-version = "1.0.0"
+version = "1.0.1"
 description = "An API Wrapper for SolvedAC API"
 authors = ["DevRuby <hiveruby@gmail.com>"]
 license = "MIT"
