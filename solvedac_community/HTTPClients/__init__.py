@@ -14,7 +14,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 """
 
 from .abstract_http_client import AbstractHTTPClient
-from .aiohttp_client import AiohttpHTTPClient
 from .httpclient import RequestMethod
 from .httpclient import ResponseData
 from .httpclient import Route
