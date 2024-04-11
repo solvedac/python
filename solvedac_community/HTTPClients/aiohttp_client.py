@@ -22,18 +22,18 @@ import aiohttp
 from solvedac_community.HTTPClients.abstract_http_client import AbstractHTTPClient
 from solvedac_community.HTTPClients.httpclient import MISSING, ResponseData, Route
 
-
 __all__ = ["AiohttpHTTPClient"]
 
 
 class AiohttpHTTPClient(AbstractHTTPClient):
     USER_AGENT: ClassVar[str] = "Mozilla/5.0"
 
-    def __init__(self, loop: asyncio.AbstractEventLoop, solvedac_token: Optional[str] = None) -> None:
-        self.loop: asyncio.AbstractEventLoop = loop
+    def __init__(self, solvedac_token: Optional[str] = None) -> None:
+        self.loop: asyncio.AbstractEventLoop = asyncio.get_event_loop()
         self.session: aiohttp.ClientSession = MISSING
         self.lock: asyncio.Lock = asyncio.Lock()
         self.solvedac_token: Union[str, None] = solvedac_token
+
         atexit.register(self.close)
 
     async def __create_session(self):
