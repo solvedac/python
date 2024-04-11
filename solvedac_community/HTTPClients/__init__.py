@@ -20,3 +20,17 @@ from .httpclient import Route
 from .httpclient import get_http_client
 
 __all__ = ["AbstractHTTPClient", "RequestMethod", "ResponseData", "Route", "get_http_client"]
+
+try:
+    from .aiohttp_client import AiohttpHTTPClient
+
+    __all__.append("AiohttpHTTPClient")
+except ImportError:
+    pass
+
+try:
+    from .httpx_client import HttpxHTTPClient
+
+    __all__.append("HttpxHTTPClient")
+except ImportError:
+    pass
