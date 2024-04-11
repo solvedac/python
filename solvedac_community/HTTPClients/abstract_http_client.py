@@ -23,7 +23,7 @@ __all__ = ["AbstractHTTPClient"]
 
 class AbstractHTTPClient(metaclass=ABCMeta):
     @abstractmethod
-    def __init__(self):
+    def __init__(self, solvedac_token: Optional[str] = None):
         pass
 
     @abstractmethod

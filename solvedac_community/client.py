@@ -25,17 +25,19 @@ __all__ = ["Client"]
 
 
 class Client:
-    __loop: asyncio.AbstractEventLoop
     __http_client: AbstractHTTPClient
     __has_token: bool
 
-    def __init__(self, solvedac_token: Optional[str] = None, http_library: HTTPClientLibrary = None) -> None:
+    def __init__(self, solvedac_token: Optional[str] = None, http_client: AbstractHTTPClient = None) -> None:
         try:
             asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
         except AttributeError:
             pass
-        self.__loop = asyncio.get_event_loop()
-        self.__http_client = get_http_client(self.__loop, solvedac_token=solvedac_token, lib=http_library)
+
+        if http_client is None:
+            self.__http_client = get_http_client(solvedac_token=solvedac_token)
+        else:
+            self.__http_client = http_client
         self.__has_token = bool(solvedac_token)
 
     async def get_user(self, handle: str) -> Models.User:
@@ -272,7 +274,9 @@ class Client:
         :return: :class:`Models.AccountInfo`
         """
 
-        response: ResponseData = await self.__http_client.request(Route(RequestMethod.GET, "/account/verify_credentials"))
+        response: ResponseData = await self.__http_client.request(
+            Route(RequestMethod.GET, "/account/verify_credentials")
+        )
 
         check_stats_code(response.status)
 

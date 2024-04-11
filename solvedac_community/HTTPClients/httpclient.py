@@ -13,11 +13,10 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import asyncio
-from enum import Enum, auto
+from enum import Enum
 from typing import ClassVar, Optional, Dict, Any
 
-__all__ = ["HTTPClientLibrary", "ResponseData", "RequestMethod", "Route", "get_http_client"]
+__all__ = ["ResponseData", "RequestMethod", "Route", "get_http_client"]
 
 
 class Missing:
@@ -27,42 +26,22 @@ class Missing:
 MISSING: Any = Missing()
 
 
-class HTTPClientLibrary(Enum):
-    AIOHTTP = auto()
-    HTTPX = auto()
-
-
-def get_http_client(
-    loop: asyncio.AbstractEventLoop, solvedac_token: Optional[str] = None, lib: Optional[HTTPClientLibrary] = None
-):
-    if lib is None:
-        try:
-            import aiohttp
-            from solvedac_community.HTTPClients.aiohttp_client import AiohttpHTTPClient
-
-            return AiohttpHTTPClient(loop, solvedac_token)
-        except ImportError:
-            pass
-
-        try:
-            import httpx
-            from solvedac_community.HTTPClients.httpx_client import HttpxHTTPClient
-
-            return HttpxHTTPClient(loop, solvedac_token)
-        except ImportError:
-            pass
-
-        raise ImportError("At least one of aiohttp or httpx libraries is required")
-
-    if lib == HTTPClientLibrary.HTTPX:
-        from solvedac_community.HTTPClients.httpx_client import HttpxHTTPClient
-
-        return HttpxHTTPClient(loop, solvedac_token)
-
-    elif lib == HTTPClientLibrary.AIOHTTP:
+def get_http_client(solvedac_token: Optional[str] = None):
+    try:
         from solvedac_community.HTTPClients.aiohttp_client import AiohttpHTTPClient
 
-        return AiohttpHTTPClient(loop, solvedac_token)
+        return AiohttpHTTPClient(solvedac_token)
+    except ImportError:
+        pass
+
+    try:
+        from solvedac_community.HTTPClients.httpx_client import HttpxHTTPClient
+
+        return HttpxHTTPClient(solvedac_token)
+    except ImportError:
+        pass
+
+    raise ImportError("At least one of aiohttp or httpx libraries is required.")
 
 
 class RequestMethod(Enum):

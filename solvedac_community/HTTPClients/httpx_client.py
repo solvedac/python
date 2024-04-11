@@ -27,8 +27,8 @@ __all__ = ["HttpxHTTPClient"]
 class HttpxHTTPClient(AbstractHTTPClient):
     USER_AGENT: ClassVar[str] = "Mozilla/5.0"
 
-    def __init__(self, loop: asyncio.AbstractEventLoop, solvedac_token: Optional[str] = None) -> None:
-        self.loop: asyncio.AbstractEventLoop = loop
+    def __init__(self, solvedac_token: Optional[str] = None) -> None:
+        self.loop: asyncio.AbstractEventLoop = asyncio.get_event_loop()
         self.lock: asyncio.Lock = asyncio.Lock()
         self.solvedac_token: Union[str, None] = solvedac_token
 
