@@ -14,11 +14,24 @@ OTHER DEALINGS IN THE SOFTWARE.
 """
 
 from .abstract_http_client import AbstractHTTPClient
+from .aiohttp_client import AiohttpHTTPClient
 from .httpclient import RequestMethod
 from .httpclient import ResponseData
 from .httpclient import Route
 from .httpclient import get_http_client
-from .aiohttp_client import AiohttpHTTPClient
-from .httpx_client import HttpxHTTPClient
 
-__all__ = ["AbstractHTTPClient", "AiohttpHTTPClient", "HttpxHTTPClient","RequestMethod", "ResponseData", "Route", "get_http_client"]
+__all__ = ["AbstractHTTPClient", "RequestMethod", "ResponseData", "Route", "get_http_client"]
+
+try:
+    from .aiohttp_client import AiohttpHTTPClient
+
+    __all__.append("AiohttpHTTPClient")
+except ImportError:
+    pass
+
+try:
+    from .httpx_client import HttpxHTTPClient
+
+    __all__.append("HttpxHTTPClient")
+except ImportError:
+    pass
