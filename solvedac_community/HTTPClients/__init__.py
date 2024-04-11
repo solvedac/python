@@ -18,5 +18,7 @@ from .httpclient import RequestMethod
 from .httpclient import ResponseData
 from .httpclient import Route
 from .httpclient import get_http_client
+from .aiohttp_client import AiohttpHTTPClient
+from .httpx_client import HttpxHTTPClient
 
-__all__ = ["AbstractHTTPClient", "RequestMethod", "ResponseData", "Route", "get_http_client"]
+__all__ = ["AbstractHTTPClient", "AiohttpHTTPClient", "HttpxHTTPClient","RequestMethod", "ResponseData", "Route", "get_http_client"]
